@@ -1,7 +1,5 @@
 # Sift File Tools
 
-Created by [@AntDX316](https://github.com/AntDX316).
-
 Blazing-fast duplicate file finder and fuzzy file search — a **Python CLI
 frontend over a compiled Rust engine**.
 
