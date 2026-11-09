@@ -1,18 +1,9 @@
 # Sift File Tools
 
-Blazing-fast duplicate file finder and fuzzy file search — a **Python CLI
-frontend over a compiled Rust engine**.
+Find exact duplicate files and search filenames from a desktop app or the
+command line. Both interfaces use the same compiled Rust engine.
 
-```
-┌────────────────────┐   JSON (stdout)    ┌──────────────────────────┐
-│  sift.py (Python)  │ ─────────────────▶ │  sift (Rust binary)      │
-│  argparse · colors │ ◀───────────────── │  rayon · walkdir · blake3│
-│  pretty printing   │   progress (stderr)│  nucleo fuzzy matcher    │
-└────────────────────┘                    └──────────────────────────┘
-```
-
-The Rust engine does the heavy lifting in parallel across all CPU cores;
-Python handles UX. No Python packaging needed — just `cargo` + `python`.
+![Sift File Tools desktop app showing exact duplicate video files](docs/sift-desktop.png)
 
 ## Setup
 
@@ -21,7 +12,20 @@ cargo build --release     # builds target/release/sift(.exe)
 python make_testdata.py   # optional: ~600 files / ~200 MB of demo data
 ```
 
-## Usage
+## Desktop app
+
+```sh
+python -m pip install dearpygui
+python twin.py
+```
+
+Pick a folder and choose **Exact duplicates** or **Filename search**. The
+duplicate scan works with any file type, including videos, and matches
+identical file contents. Filename search ranks files by how well the name
+matches your query. From either result view, open a file's folder or copy its
+full path. The app leaves file contents and locations untouched.
+
+## Command line
 
 ```sh
 python sift.py scan [PATH] [--min-size BYTES] [--hidden] [--json]
@@ -86,6 +90,7 @@ since hashing parallelizes across cores while Python stays single-threaded.
 | file | purpose |
 |---|---|
 | `src/main.rs` | Rust engine: `scan` + `find` subcommands, JSON output |
+| `twin.py` | Twin desktop interface for duplicate scans and filename search |
 | `sift.py` | Python CLI: args, auto-build, colored rendering |
 | `make_testdata.py` | generates `testdata/` demo corpus |
 | `Cargo.toml` | engine dependencies |
