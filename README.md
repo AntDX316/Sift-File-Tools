@@ -89,3 +89,7 @@ since hashing parallelizes across cores while Python stays single-threaded.
 | `sift.py` | Python CLI: args, auto-build, colored rendering |
 | `make_testdata.py` | generates `testdata/` demo corpus |
 | `Cargo.toml` | engine dependencies |
+
+## Credits
+
+Created by [@AntDX316](https://github.com/AntDX316).
